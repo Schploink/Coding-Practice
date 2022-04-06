@@ -1,3 +1,3 @@
-const threeSum = () => {
+const threeSum = (array) => {
   
 }
