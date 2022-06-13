@@ -1,11 +1,15 @@
 // function square(number) {
-//   return number * number
+//     return number * number
 // }
 
-const square = (number) => {
-    return number * number
-}
+// const square = (number) => {
+//     return number * number
+// }
 
-const stringExample = "hello world"
+const square = (number) => (
+   number * number
+)
 
-console.log(stringExample.toUpperCase)
+const string = "hello world"
+
+console.log(square(2))
