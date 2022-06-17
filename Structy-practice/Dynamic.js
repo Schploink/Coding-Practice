@@ -29,3 +29,31 @@ const sumPossible = (amount, numbers, memo = {}) => {
 
 // memoization - runtime O(a * n)
 // memoize at return statement
+
+const minChange = (amount, coins) => {
+  let answer = _minChange(amount, coins)
+  
+  if (answer === Infinity) {
+    return -1
+  } else {
+    return answer
+  }
+}
+
+const _minChange = (amount, coins, memo = {}) => {
+  if (amount === 0) return 0
+  if (amount < 0) return Infinity
+  if (amount in memo) return memo[amount]
+  
+  let minCoins = Infinity
+  
+  for (let coin of coins) {
+    let numCoins = 1 + _minChange(amount - coin, coins, memo)
+    minCoins = Math.min(numCoins, minCoins)
+  }
+  
+  memo[amount] = minCoins
+  return minCoins
+};
+
+// use helper function to define logic if no minimum found
