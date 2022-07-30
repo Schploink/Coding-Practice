@@ -14,3 +14,4 @@ var canJump = function(nums) {
     
 };
 // jumpgame 1
+// jumpgame 2
