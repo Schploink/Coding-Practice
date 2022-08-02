@@ -31,3 +31,5 @@ var canJump = function(nums) {
     }
     
 };
+
+// Binary Search w/rotation
