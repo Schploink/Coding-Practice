@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import React, { useState } from "react"
+import Axios from 'axios'
 import './App.css';
 
 function App() {
+
+  const [foodName, setFoodName] = useState('')
+  const [days, setDays] = useState(0)
+
+  const addToList = () => {
+    Axios.post("http://localhost:3001/insert", 
+    {
+      foodName: foodName,
+      days: days,
+    })
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1> CRUD App with MERN </h1>
+      <label htmlFor="food">What did I eat?</label>
+      <input 
+        id="food" 
+        type="text" 
+        onChange={(event) => {
+          setFoodName(event.target.value)
+        }}/>
+      <label htmlFor="days">When did I eat it?</label>
+      <input 
+        id="days" 
+        type="number"
+        onChange={(event) => {
+          setDays(event.target.value)
+        }}/>
+      <button onClick={addToList}>Add to List</button>
     </div>
   );
 }
