@@ -13,7 +13,7 @@ function App() {
     Axios.get('http://localhost:3001/read').then((response) => {
       setFoodList(response.data)
     })
-  }, [])
+  }, [foodList])
 
   const addToList = () => {
     Axios.post("http://localhost:3001/insert", 
@@ -23,8 +23,16 @@ function App() {
     })
   }
 
-  const updateFood = () => {
-    Axios.put("http://localhost:3001/update")
+  const updateFood = (id) => {
+    Axios.put("http://localhost:3001/update",
+    {
+      id: id,
+      newFoodName: newFoodName, 
+    })
+  }
+
+  const deleteFood = (id) => {
+    Axios.delete(`http://localhost:3001/delete/${id}`)
   }
 
   return (
@@ -58,8 +66,8 @@ function App() {
                     setNewFoodName(event.target.value)
                   }}
                 />
-                <button onClick={updateFood()}>Update</button>
-                <button onClick={deleteFood()}>Didn't eat that!</button>
+                <button onClick={() => updateFood(val._id)}>Update</button>
+                <button onClick={() => deleteFood(val._id)}>Didn't eat that!</button>
               </div>
       })}
       </div>

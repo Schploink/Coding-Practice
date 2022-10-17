@@ -32,7 +32,32 @@ app.get("/read", async (req, res) => {
     }
     res.send(result)
   })
+})
 
+app.put("/update", async (req, res) => {
+  const newFoodName = req.body.newFoodName
+  const id = req.body.id
+
+  try {
+    await FoodModel.findById(id, (err, updatedFood) => {
+        updatedFood.foodName = newFoodName
+        updatedFood.save()
+        res.send("updated")
+    })
+  } catch(err) {
+    console.log(err)
+  }
+})
+
+app.delete("/delete/:id", async (req, res) => {
+  const id = req.params.id
+
+  try {
+    await FoodModel.findByIdAndRemove(id).exec()
+    res.send("daleted")
+  } catch(err) {
+    console.log(err)
+  }
 })
 
 app.listen(3001, () => {
