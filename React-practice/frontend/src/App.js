@@ -7,6 +7,7 @@ function App() {
   const [foodName, setFoodName] = useState('')
   const [days, setDays] = useState(0)
   const [foodList, setFoodList] = useState([])
+  const [newFoodName, setNewFoodName] = useState('')
 
   useEffect(() => {
     Axios.get('http://localhost:3001/read').then((response) => {
@@ -20,6 +21,10 @@ function App() {
       foodName: foodName,
       days: days,
     })
+  }
+
+  const updateFood = () => {
+    Axios.put("http://localhost:3001/update")
   }
 
   return (
@@ -46,6 +51,15 @@ function App() {
         return <div key={key}> 
                 <h2> {val.foodName} </h2> 
                 <h2> {val.daysSinceIAte} </h2> 
+                <input 
+                  type="text" 
+                  placeholder="New Food Name..."
+                  onChange={(event) => {
+                    setNewFoodName(event.target.value)
+                  }}
+                />
+                <button onClick={updateFood()}>Update</button>
+                <button onClick={deleteFood()}>Didn't eat that!</button>
               </div>
       })}
       </div>
